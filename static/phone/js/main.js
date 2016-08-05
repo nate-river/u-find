@@ -4,8 +4,8 @@ $(function(){
   };
 
   User.prototype = {
-    checkUser: function(){
-      return $.get('/checkUser').then(function(data){
+    checkUser: function(obj){
+      return $.get('/checkUser',obj).then(function(data){
         return data;
       });
     },
@@ -50,6 +50,13 @@ $(function(){
   // u.addUser().then(function(data){
   //   console.log(data);
   // })
+  // u.checkUser({
+  //   uid:'46',
+  //   password:'456789',
+  // }).then(function(data){
+  //   console.log(data);
+  // })
+
   // u.deleteUserById(41).then(function(data){
   //   console.log(data);
   // });
@@ -62,12 +69,12 @@ $(function(){
   // u.getAllUser().then(function(data){
   //   console.log(data);
   // })
-  // u.updateUserById({
-  //   uid:33,
-  //   uname:'abcd',
-  //   phone:'134567890',
-  //   tel:'6710',
-  // });
+  u.updateUserById({
+    uid:47,
+    uname:'张三',
+    phone:'000000',
+    tel:'000',
+  });
 
 
 

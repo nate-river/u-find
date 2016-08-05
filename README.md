@@ -13,6 +13,7 @@
 
 ### 采用技术
 
+
 * 布局使用viewprot定死固定尺寸
 * js采用jquery2.0 + 百度Touch.js
 * 服务器一套ajax接口 使用bom跳转页面
