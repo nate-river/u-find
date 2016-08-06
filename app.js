@@ -35,10 +35,6 @@ var connection = mysql.createConnection({
   database : 'uek',
   // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
 });
-connection.query('set names utf8');
-
-
-
 
 
 app.get('/checkUser', function (req, res) {
@@ -76,6 +72,38 @@ app.get('/addUser', function (req, res) {
   });
 });
 
+app.get('/resetPasswordById',function(req,res){
+
+  var hash = crypto.createHash("md5");
+  hash.update(new Buffer("123456", "binary"));
+  var password = hash.digest('hex');
+
+  connection.query( 'UPDATE user SET password = ?  WHERE uid = ?',
+  [password,req.query.uid],function(err,result){
+    if (err){
+      res.json(false);
+    }else{
+      res.json(true);
+    }
+
+  });
+});
+
+app.get('/setPassword',function(req,res){
+  var hash = crypto.createHash("md5");
+  hash.update(new Buffer(req.query.password, "binary"));
+  var password = hash.digest('hex');
+  connection.query( 'UPDATE user SET password = ?  WHERE uid = ?',
+  [password,req.query.uid],function(err,result){
+    if (err){
+      res.json(false);
+    }else{
+      res.json(true);
+    }
+  });
+});
+
+
 app.get('/deleteUserById', function (req, res) {
   connection.query('DELETE FROM user WHERE uid = ?', [req.query.uid], function(err, result) {
     if (err){
@@ -97,9 +125,10 @@ app.get('/updateUserById', function (req, res) {
   var account = r.map(function(v){
     return v[0];
   }).join('');
+  var sindex = account[0];
 
-  connection.query( 'UPDATE user SET uname = ?, phone = ?, tel = ?, account = ?  WHERE uid = ?'
-  , [ q.uname, q.phone, q.tel, account, q.uid] , function(err, results) {
+  connection.query( 'UPDATE user SET uname = ?, phone = ?, tel = ?, account = ?, sindex = ?  WHERE uid = ?'
+  , [ q.uname, q.phone, q.tel, account, sindex, q.uid] , function(err, results) {
     if (err){
       res.json(false);
     }else{
@@ -109,7 +138,7 @@ app.get('/updateUserById', function (req, res) {
 });
 
 app.get('/getAllUser', function (req, res) {
-  var columns = ['uname', 'phone', 'tel', 'uid'];
+  var columns = ['uname', 'phone', 'tel', 'uid','sindex'];
   connection.query('SELECT ?? from user', [columns], function(err, rows, fields) {
     if (err) throw err;
     res.json(rows);
@@ -118,7 +147,7 @@ app.get('/getAllUser', function (req, res) {
 
 app.get('/getUserById', function (req, res) {
   var uid = req.query.uid;
-  var columns = ['uname', 'phone', 'tel', 'uid'];
+  var columns = ['uname', 'phone', 'tel', 'uid','sindex'];
   connection.query('SELECT ?? from user where uid = ?',[columns,uid], function(err, rows, fields) {
     if (err) throw err;
     res.json(rows[0]);

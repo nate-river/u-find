@@ -9,6 +9,16 @@ $(function(){
         return data;
       });
     },
+    resetPasswordById: function(id){
+      return $.get('/resetPasswordById',{uid:id}).then(function(data){
+        return data;
+      });
+    },
+    setPassword: function(id,pass){
+      return $.get('/setPassword',{uid:id,password:pass}).then(function(data){
+        return data;
+      });
+    },
     addUser: function(){
       return $.get('/addUser').then(function(data){
         return data;
@@ -50,12 +60,14 @@ $(function(){
   // u.addUser().then(function(data){
   //   console.log(data);
   // })
-  // u.checkUser({
-  //   uid:'46',
-  //   password:'456789',
-  // }).then(function(data){
-  //   console.log(data);
-  // })
+  u.checkUser({
+    uid:'46',
+    password:'12345',
+  }).then(function(data){
+    console.log(data);
+  })
+
+  u.resetPasswordById(46);
 
   // u.deleteUserById(41).then(function(data){
   //   console.log(data);
@@ -71,10 +83,11 @@ $(function(){
   // })
   u.updateUserById({
     uid:47,
-    uname:'张三',
+    uname:'赵六',
     phone:'000000',
     tel:'000',
   });
+  u.setPassword(47,'abcdef');
 
 
 

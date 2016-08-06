@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: 2016-08-05 02:32:22
+-- Generation Time: 2016-08-06 02:24:44
 -- 服务器版本： 5.5.42
 -- PHP Version: 7.0.0
 
@@ -27,15 +27,15 @@ CREATE TABLE `user` (
   `uid` int(11) NOT NULL,
   `account` varchar(255) NOT NULL,
   `sindex` varchar(255) NOT NULL,
-  `uname` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `password` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `uname` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `authority` int(11) NOT NULL,
-  `phone` varchar(255) CHARACTER SET latin1 NOT NULL,
-  `tel` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `tel` varchar(255) NOT NULL,
   `ctime` int(11) NOT NULL,
   `mtime` int(11) NOT NULL,
   `is_del` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -46,3 +46,13 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
