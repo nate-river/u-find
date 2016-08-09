@@ -49,6 +49,10 @@ $(function () {
   }
   var u = new User();
 
+  ///////////////////////////
+  ///////////////////////
+
+
   //浏览器高度
   $(".lxr_refresh").height($(window).height()-180);
 
