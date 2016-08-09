@@ -4,6 +4,19 @@ app.use( express.static( __dirname + '/static/') );
 var pinyin = require("pinyin");
 var mysql      = require('mysql');
 var crypto = require('crypto');
+var http = require('http');
+
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+// var check = function (req, res, next) {
+//    var url = req.originalUrl;
+//     if (url !== "/login" && !req.cookies.uekuname) {
+//         return res.redirect("/login");
+//     }
+//     next();
+// };
+// app.use(check);
 
 app.get('/app/login', function (req, res) {
   res.sendFile(__dirname+'/phone/m_login.html'  ) ;
@@ -14,12 +27,12 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/app/', function (req, res) {
-  console.log(req.cookies);
+  // console.log(req.cookies);
   res.sendFile(__dirname+'/phone/m_index.html'  ) ;
 });
 
 app.get('/', function (req, res) {
-  console.log(req.cookies);
+  // console.log(req.cookies);
   res.sendFile(__dirname+'/pc/index.html'  ) ;
 });
 

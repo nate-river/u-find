@@ -4,6 +4,7 @@
   "description": "uek oa system restful api",
   "main": "app.js",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "mysql": "^2.11.1",
     "pinyin": "^2.8.0"
