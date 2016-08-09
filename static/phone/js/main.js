@@ -1,21 +1,12 @@
 $(function(){
 
   function User () {
+    
   };
 
   User.prototype = {
-    checkUser: function(obj){
-      return $.get('/checkUser',obj).then(function(data){
-        return data;
-      });
-    },
-    resetPasswordById: function(id){
-      return $.get('/resetPasswordById',{uid:id}).then(function(data){
-        return data;
-      });
-    },
-    setPassword: function(id,pass){
-      return $.get('/setPassword',{uid:id,password:pass}).then(function(data){
+    checkUser: function(){
+      return $.get('/checkUser').then(function(data){
         return data;
       });
     },
@@ -55,20 +46,14 @@ $(function(){
       },'json')
     }
   }
+
   var u = new User();
+
+  
 
   // u.addUser().then(function(data){
   //   console.log(data);
   // })
-  u.checkUser({
-    uid:'46',
-    password:'12345',
-  }).then(function(data){
-    console.log(data);
-  })
-
-  u.resetPasswordById(46);
-
   // u.deleteUserById(41).then(function(data){
   //   console.log(data);
   // });
@@ -81,16 +66,12 @@ $(function(){
   // u.getAllUser().then(function(data){
   //   console.log(data);
   // })
-  u.updateUserById({
-    uid:47,
-    uname:'赵六',
-    phone:'000000',
-    tel:'000',
-  });
-  u.setPassword(47,'abcdef');
-
-
-
+  // u.updateUserById({
+  //   uid:33,
+  //   uname:'abcd',
+  //   phone:'134567890',
+  //   tel:'6710',
+  // });
 
 
   // /////////////////// 纯Ajax请求示例代码 //////////////
@@ -140,5 +121,8 @@ $(function(){
   // //   console.log(data);
   // // },'json')
   //
+
+
+
 
 })

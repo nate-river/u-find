@@ -1,0 +1,195 @@
+body,
+ul,
+ol,
+li,
+p,
+pre,
+form,
+input,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+body {
+  background: #ffffff;
+}
+* {
+  font-family: "Microsoft YaHei UI";
+}
+.lx_top {
+  width: 100%;
+  height: 110px;
+  background: #01a5e2;
+  position: relative;
+}
+.lx_top .lx_topCon {
+  position: relative;
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  background: url("../imgs/lx_logo.png") no-repeat left top;
+}
+.lx_top .lx_topCon #lx_search {
+  width: 330px;
+  height: 76px;
+  background: url("../imgs/lx_search.png") no-repeat left top;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 20px;
+  line-height: 76px;
+}
+.lx_top .lx_topCon input {
+  height: 42px;
+  width: 73%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  right: 20px;
+  border: none;
+  background: none;
+  color: #ffffff;
+  font-size: 16px;
+}
+.lx_top .lx_topCon ::-webkit-input-placeholder {
+  color: #e9e9e9;
+}
+.lx_top .lx_topCon :-moz-placeholder {
+  color: #e9e9e9;
+}
+.lx_top .lx_topCon :-ms-input-placeholder {
+  color: #e9e9e9;
+}
+.lx_phone {
+  width: 100%;
+  height: auto;
+  padding: 50px 0;
+  background-color: #ffffff;
+  background-image: url("../imgs/lx_bg.png"), url("../imgs/lx_bgT.png"), url("../imgs/lx_bgB.png");
+  background-position: center center, -40px top, right bottom;
+  background-repeat: no-repeat;
+}
+.lx_phone .lx_phoneCon {
+  width: 1020px;
+  height: auto;
+  margin: 0 auto;
+}
+.lx_phone .lx_hideC .lx_change {
+  display: block!important;
+}
+.lx_phone .lx_hideC .lx_info {
+  display: none!important;
+}
+.lx_phone .lx_phoneItemF {
+  width: 260px;
+  height: 79px;
+  margin: 40px;
+  float: left;
+  border-bottom: 1px solid #dedede;
+  position: relative;
+}
+.lx_phone .lx_phoneItemF img {
+  width: 52px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+.lx_phone .lx_phoneItem {
+  width: 260px;
+  height: 79px;
+  margin: 40px;
+  float: left;
+  border-bottom: 1px solid #dedede;
+  position: relative;
+}
+.lx_phone .lx_phoneItem img {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ebebeb;
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.lx_phone .lx_phoneItem .lx_info {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 35px;
+}
+.lx_phone .lx_phoneItem .lx_info .lx_name {
+  font-size: 18px;
+  color: #3f3f3f;
+}
+.lx_phone .lx_phoneItem .lx_info .lx_tel {
+  font-size: 14px;
+  color: #dedede;
+}
+.lx_phone .lx_phoneItem .lx_change {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 174px;
+  line-height: 35px;
+  display: none;
+}
+.lx_phone .lx_phoneItem .lx_change input {
+  border: none;
+  border-bottom: 1px solid #dedede;
+  padding: 3px;
+  outline: none;
+  background: none;
+}
+.lx_phone .lx_phoneItem .lx_btn {
+  width: 55px;
+  height: 20px;
+  position: absolute;
+  top: -15px;
+  right: 5px;
+}
+.lx_phone .lx_phoneItem .lx_btn a {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.lx_phone .lx_phoneItem .lx_btn a:first-of-type {
+  background: url("../imgs/lx_del.png") no-repeat center;
+}
+.lx_phone .lx_phoneItem .lx_btn a:nth-of-type(2) {
+  background: url("../imgs/lx_change.png") no-repeat center;
+}
+.lx_footer {
+  width: 100%;
+  height: 50px;
+  background: #01a5e2;
+}
+.lx_footer .lx_footerCon {
+  width: 1020px;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0 auto;
+}
