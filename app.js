@@ -44,7 +44,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   port     : '3306',
   user     : 'root',
-  password : 'root',
+  password : '',
   database : 'uek',
   // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
 });
@@ -56,10 +56,10 @@ app.get('/checkUser', function (req, res) {
   hash.update(new Buffer(req.query.password, "binary"));
   var encode = hash.digest('hex');
 
-  connection.query('SELECT ?? FROM user where uid = ?',
-  ['password',req.query.uid]
+  connection.query('SELECT ?? FROM user where account = ?',
+  ['password',req.query.account]
   , function(err, result) {
-    if( result[0].password === encode){
+    if( result[0] && (result[0].password === encode) ){
       res.json(true);
     }else{
       res.json(false);
@@ -85,14 +85,14 @@ app.get('/addUser', function (req, res) {
   });
 });
 
-app.get('/resetPasswordById',function(req,res){
+app.get('/resetPasswordByAccount',function(req,res){
 
   var hash = crypto.createHash("md5");
   hash.update(new Buffer("123456", "binary"));
   var password = hash.digest('hex');
 
-  connection.query( 'UPDATE user SET password = ?  WHERE uid = ?',
-  [password,req.query.uid],function(err,result){
+  connection.query( 'UPDATE user SET password = ?  WHERE account = ?',
+  [password,req.query.account],function(err,result){
     if (err){
       res.json(false);
     }else{
@@ -106,8 +106,8 @@ app.get('/setPassword',function(req,res){
   var hash = crypto.createHash("md5");
   hash.update(new Buffer(req.query.password, "binary"));
   var password = hash.digest('hex');
-  connection.query( 'UPDATE user SET password = ?  WHERE uid = ?',
-  [password,req.query.uid],function(err,result){
+  connection.query( 'UPDATE user SET password = ?  WHERE account = ?',
+  [password,req.query.account],function(err,result){
     if (err){
       res.json(false);
     }else{

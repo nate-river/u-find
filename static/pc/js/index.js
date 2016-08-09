@@ -91,9 +91,10 @@ $(function(){
   })
 //  添加成员
     $(".lx_phoneItemF img").click(function(){
-        $('.lx_phoneItemF').before(createItem({uname:"张三",phone:"11111111111",tel:"2222"}));
+
         u.addUser().then(function(data){
-          console.log(data);
+            $('.lx_phoneItemF').before(createItem({uname:"张三",phone:"11111111111",tel:"2222",uid:data}));
+            // $(".lx_phoneItem:last-of-type").attr("id",data);
         });
 
     })
@@ -131,3 +132,7 @@ $(function(){
         return  lx_phoneItem;
     }
 })
+
+
+
+

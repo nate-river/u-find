@@ -2,10 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!--<meta name="viewport" content="width=750,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>-->
   <title>Document</title>
+  <script src="/phone/js/jquery.js"></script>
+  <script src="/phone/js/jquery.validate.js"></script>
+  <script src="/phone/js/messages_zh.js"></script>
+  <link rel="stylesheet" href="/phone/css/reset.css">
+  <link rel="stylesheet" href="/phone/css/login.css">
+  <!--<script src="../app.js"></script>-->
+  <script src="/phone/js/login.js"></script>
 </head>
 <body>
-  手机登录页面
+  <div class="wlh-loginbox">
+	<!--登录 start-->
+	<div class="wlh-login">
+		<div class="wlh-logo">
+			<img src="/pc/imgs/wlh/wlh_logo.png" alt="">
+		</div>
+		<p>山西优逸客科技有限公司内网聊天系统</p>
+		<form action="" method="get" name="mylogin" class="mylogin">
+			<div class="wlh-text">
+				<input id="username" type="text" placeholder="请输入账号！" name="username">
+			</div>
+		    <div class="wlh-ps">
+		    	<input type="password" placeholder="请输入密码！" name="userps">
+		    </div>		 
+        <div class="wlh-radio">
+          <input type="radio" name="jizhu" checked="true" id="jizhu"> <label for="#jizhu">记住账号</label>
+        </div>   		    
+		    
+		    <div class="wlh-btn">
+		    	<input class="wlh-res" type="button" value="密码重置" name="res">
+		      <input class="wlh-sub" type="submit" value="提交" name="sub">
+		    </div> 
+		    
+		</form>
+	</div>
+	<!--登录 end-->
+
+	<!--提示重置成功 start-->
+	<div class="wlh-zhezhao">
+		<div class="wlh-resetbox">
+			<div class="wlh-reset-title">
+				<img src="/pc/imgs/wlh/wlh_reset_title.png" alt="">
+			</div>
+			<p>
+				您的密码已重置为默认密码是否马上修改
+			</p>
+			<div class="wlh-xiugai">
+				<img src="/pc/imgs/wlh/wlh_xiugai.png" alt="">
+			</div>
+		</div>
+    <div class="wlh-resetbox2">
+      <div class="wlh-reset-title">
+        <img src="/pc/imgs/wlh/wlh_reset_title.png" alt="">
+      </div>
+      <p>
+        您的密码已修改成功，请重新登录
+      </p>
+    </div>
+	</div> 
+	<!--提示重置成功 end-->
+
+    <!--密码重置 satrt-->
+    <div class="wlh-reset">
+    	<div class="wlh-reset-photo">
+    		<div class="wlh-photo">
+    			<img src="/pc/imgs/wlh/wlh_photo.png" alt="">
+    		</div>
+    		<div class="wlh-photo-zhe"></div>
+    	</div>
+    	<div class="wlh-resize-title">
+    		<p>RESET MY PASSWORD</p>
+    		<p>重置密碼</p>
+    	</div>
+    	<form action="" method="post" name="myreset" class="myreset">
+    			<div class="wlh-text">
+    				<input id="username2" type="text" placeholder="请输入账号！" name="username2">
+    			</div>
+    		    <div class="wlh-ps">
+    		    	<input type="password" id="mima" placeholder="请输入密码！" name="userps1">
+    		    </div>
+    		    <div class="wlh-ps">
+    		    	<input type="password" placeholder="请输入密码！" name="userps2">
+    		    </div>	    		    
+    		    <input type="submit" value="" class="wlh-btn">
+    		    
+    		</form>
+    </div>
+    <!--密码重置 end-->
+</div>
   <button>设置cookie</button>
 </body>
 <script>
