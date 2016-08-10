@@ -183,6 +183,8 @@ $(function(){
 
 		}else{
 			u.setPassword({account:$("[name='username']").val(),password:"123456"})
+      $(".wlh-resetbox").animate({top:(ch-$(".wlh-resetbox").innerHeight())/2},300);
+      $(".wlh-resetbox").delay(700).animate({top:-295},300);
 		}
 
 	})
@@ -206,5 +208,5 @@ $(function(){
 	    })
 	})
 
-	
+
 })

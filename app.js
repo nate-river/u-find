@@ -1,12 +1,12 @@
 var express = require('express');
-var app = express();
-app.use( express.static( __dirname + '/static/') );
-var pinyin = require("pinyin");
+var pinyin = require('pinyin');
 var mysql      = require('mysql');
 var crypto = require('crypto');
-var http = require('http');
-
 var cookieParser = require('cookie-parser');
+
+var app = express();
+
+app.use( express.static( __dirname + '/static/') );
 app.use(cookieParser());
 
 // var check = function (req, res, next) {
@@ -27,12 +27,10 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/app/', function (req, res) {
-  // console.log(req.cookies);
   res.sendFile(__dirname+'/phone/m_index.html'  ) ;
 });
 
 app.get('/', function (req, res) {
-  // console.log(req.cookies);
   res.sendFile(__dirname+'/pc/index.html'  ) ;
 });
 
@@ -44,19 +42,20 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   port     : '3306',
   user     : 'root',
-  password : '',
+  password : 'root',
   database : 'uek',
   // socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
 });
 
 
+///////////////////////////////////////////////////////////////////////////////
 app.get('/checkUser', function (req, res) {
 
   var hash = crypto.createHash("md5");
   hash.update(new Buffer(req.query.password, "binary"));
   var encode = hash.digest('hex');
 
-  connection.query('SELECT ?? FROM user where account = ?',
+  connection.query('SELECT ?? FROM user where phone = ?',
   ['password',req.query.account]
   , function(err, result) {
     if( result && (result[0].password === encode) ){
@@ -66,6 +65,38 @@ app.get('/checkUser', function (req, res) {
     }
   });
 });
+
+app.get('/resetPasswordByAccount',function(req,res){
+
+  var hash = crypto.createHash("md5");
+  hash.update(new Buffer("123456", "binary"));
+  var password = hash.digest('hex');
+
+  connection.query( 'UPDATE user SET password = ?  WHERE phone = ?',
+  [password,req.query.account],function(err,result){
+    if (err){
+      res.json(false);
+    }else{
+      res.json(true);
+    }
+  });
+});
+
+app.get('/setPassword',function(req,res){
+  var hash = crypto.createHash("md5");
+  hash.update(new Buffer(req.query.password, "binary"));
+  var password = hash.digest('hex');
+  connection.query( 'UPDATE user SET password = ?  WHERE phone = ?',
+  [password,req.query.account],function(err,result){
+    if (err){
+      res.json(false);
+    }else{
+      res.json(true);
+    }
+  });
+});
+
+////////////////////////////////////////////////////////////////////////////////
 
 app.get('/addUser', function (req, res) {
   var date = new Date();
@@ -85,36 +116,7 @@ app.get('/addUser', function (req, res) {
   });
 });
 
-app.get('/resetPasswordByAccount',function(req,res){
 
-  var hash = crypto.createHash("md5");
-  hash.update(new Buffer("123456", "binary"));
-  var password = hash.digest('hex');
-
-  connection.query( 'UPDATE user SET password = ?  WHERE account = ?',
-  [password,req.query.account],function(err,result){
-    if (err){
-      res.json(false);
-    }else{
-      res.json(true);
-    }
-
-  });
-});
-
-app.get('/setPassword',function(req,res){
-  var hash = crypto.createHash("md5");
-  hash.update(new Buffer(req.query.password, "binary"));
-  var password = hash.digest('hex');
-  connection.query( 'UPDATE user SET password = ?  WHERE account = ?',
-  [password,req.query.account],function(err,result){
-    if (err){
-      res.json(false);
-    }else{
-      res.json(true);
-    }
-  });
-});
 
 
 app.get('/deleteUserById', function (req, res) {
@@ -141,7 +143,7 @@ app.get('/updateUserById', function (req, res) {
   var sindex = account[0];
 
   connection.query( 'UPDATE user SET uname = ?, phone = ?, tel = ?, account = ?, sindex = ?  WHERE uid = ?'
-  , [ q.uname, q.phone, q.tel, account, sindex, q.uid] , function(err, results) {
+  , [ q.uname.trim(), q.phone.trim(), q.tel.trim(), account, sindex, q.uid] , function(err, results) {
     if (err){
       res.json(false);
     }else{
