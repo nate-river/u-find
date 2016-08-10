@@ -1,12 +1,6 @@
 $(function(){
   var contacts = [];
 
-  $.get('/getAllUser').then(function(list){
-    contacts = list;
-    render(contacts);
-  },'json');
-
-
   //侧边栏
   var sideEl = $('.indexlist');
 
@@ -31,7 +25,15 @@ $(function(){
   var soff = $('.header').height() + $('.sub-header').height();
 
 
-  var render = function(contacts){
+  var sync = function(){
+    $.get('/getAllUser').then(function(list){
+      contacts = list;
+      render(contacts);
+      localStorage.__findu__data = JSON.stringify(contacts);
+    },'json');
+  }
+
+  var  render = function(contacts){
     var data = {};
     contacts.forEach(function(v){
       var key = v.sindex.toUpperCase();
@@ -83,6 +85,17 @@ $(function(){
     sep = sideEl.find('li').outerHeight(true);
     sidetop = sideEl.position().top;
   }
+
+
+  /////////////////////////////////////////////////////////
+  // if(localStorage.__findu__data){
+    // contacts = JSON.parse(localStorage.__findu__data);
+    // render(contacts);
+  // }else{
+  sync();
+  // }
+
+
 
   ////////////////////////////////////////////////////////////////////
   //头部固定字母条

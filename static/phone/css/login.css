@@ -46,7 +46,7 @@
   width: 3.93rem;
   height: 0.64rem;
   background: url("../imgs/wlh/wlh_user.png") no-repeat 20px center;
-  background-size:33px 36px;
+  /*background-size:33px 36px;*/
   border: 0px;
   font-size:0.26rem;
   border: 1px solid #22adec;
@@ -61,7 +61,7 @@
   width: 3.93rem;
   height: 0.64rem;
   background: url("../imgs/wlh/wlh_mima.png") no-repeat 20px center;
-  background-size:33px 36px;
+  /*background-size:33px 36px;*/
   border: 0px;
   font-size: 0.26rem;
   border: 1px solid #22adec;

@@ -4,18 +4,12 @@ body{
 }
 *{
   -webkit-tap-highlight-color:transparent;
-  -webkit-touch-callout:none;
-  -webkit-user-select:none;
-  -khtml-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
 }
 
 @mixin userem($size){
-  $list: 800px,414px,412px,384px,375px,360px,320px;
+  $list: 1024px,800px,768px,600px,435px,414px,412px,384px,375px,360px,320px;
   @each $i in $list{
-    @media screen and (max-width: #{$i}){
+    @media screen and (min-width: #{$i}){
       html{
         font-size:100px * ( $i / $size);
       }
@@ -83,21 +77,21 @@ ul,li{
   line-height: 0.8rem;
   text-align: center;
   background-color: #f9f9f9;
-  z-index: 1000;
+  z-index: 1;
 }
 .sub-header{
-  z-index: 1000;
   position: fixed;
   top:0.8rem;
   left:0;
   width: 100%;
   height: 0.88rem;
   background: #c9c9ce;
+  z-index: 1;
 
   .search{
-    width: 5.9rem;
-    height: 0.56rem;
     display: block;
+    width: 5.5rem;
+    height: 0.5rem;
     border:none;
     border-radius:5px;
     @include center;
@@ -116,9 +110,9 @@ ul,li{
   .indexlist{
     width: 0.3rem;
     position: fixed;
-    z-index: 1000;
     top:0;
     right:0;
+    z-index: 2;
 
     li{
       text-align: center;
@@ -134,7 +128,6 @@ ul,li{
 
   .fixedindex{
     position: fixed;
-    z-index: 1000;
     top:1.68rem;
     left: 0;
     width: 100%;
@@ -142,6 +135,7 @@ ul,li{
     height: 0.56rem;
     line-height: 0.56rem;
     background-color: #f2f2f2;
+    z-index: 1;
   }
 
   .userlist{

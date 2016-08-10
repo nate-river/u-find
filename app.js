@@ -10,11 +10,14 @@ app.use( express.static( __dirname + '/static/') );
 app.use(cookieParser());
 
 // var check = function (req, res, next) {
-//    var url = req.originalUrl;
-//     if (url !== "/login" && !req.cookies.uekuname) {
-//         return res.redirect("/login");
-//     }
-//     next();
+//   var url = req.originalUrl;
+//   if(url === '/app/login' || url === '/login' ){
+//
+//   }
+//   // if (url !== '/app/login' && !req.cookies.___uek___) {
+//   //   return res.redirect("/app/login");
+//   // }
+//   next();
 // };
 // app.use(check);
 
@@ -58,8 +61,11 @@ app.get('/checkUser', function (req, res) {
   connection.query('SELECT ?? FROM user where phone = ?',
   ['password',req.query.account]
   , function(err, result) {
-    if( result && (result[0].password === encode) ){
-      res.json(true);
+    if( result[0] && (result[0].password === encode) ){
+      res.json({
+        phone:req.query.account,
+        password:result[0].password,
+      });
     }else{
       res.json(false);
     }
