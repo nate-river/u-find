@@ -61,6 +61,9 @@ $(function(){
     sideEl.height( function(){
       return $(this).children().eq(0).outerHeight(true) * indexlists.length;
     } );
+    sideEl.css({
+      top: ($(window).outerHeight(true)-sideEl.height())/2
+    })
     userlistEl.html(userlistHtml)
 
     //去掉每组最后一个成员的分割线
@@ -78,7 +81,7 @@ $(function(){
 
     //触摸滚动需要的变量
     sep = sideEl.find('li').outerHeight(true);
-    sidetop = sideEl.get(0).getBoundingClientRect().top;
+    sidetop = sideEl.position().top;
   }
 
   ////////////////////////////////////////////////////////////////////
