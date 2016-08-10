@@ -2,41 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="findu">
+
+
   <title>uek</title>
   <script src="/phone/js/jquery.js" charset="utf-8"></script>
-  <script src="/phone/js/touch.js" charset="utf-8"></script>
-  <script src="/phone/js/iscroll.js" charset="utf-8"></script>
-  <script src="/phone/js/lxr_infor.js"></script>
   <script src="/phone/js/main.js" charset="utf-8"></script>
-  <script src="/phone/js/lxr_index.js" charset="utf-8"></script>
-  <script src="/phone/js/lxr_refresh.js" charset="utf-8"></script>
-
   <link rel="stylesheet" href="/phone/css/main.css">
-
 </head>
-
 <body>
-
-
-  <div class="lxr_header">所有联系人</div>
-	<div class="lxr_search">
-		<input type="text" name="" id="search" placeholder="搜索" />
-		<img src="/phone/imgs/lxr.png" alt="" />
-	</div>
-
-  <div class="reminder">a</div>
-
-  <div class="lxr_refresh">
-    <p class="lxr_shuaxin">刷新</p>
-    <div class="lxr_body"></div>
+  <div class="header">
+    联系人
+  </div>
+  <div class="sub-header">
+    <input type="text" class="search" id="search">
   </div>
 
-	<ul class="lxr_slide"></ul>
-
-
-
-
+  <div class="content">
+    <div class="fixedindex"></div>
+    <ul class="indexlist"></ul>
+    <dl class="userlist">
+    </dl>
+  </div>
 </body>
-
 </html>

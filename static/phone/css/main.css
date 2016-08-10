@@ -1,128 +1,170 @@
+@charset "UTF-8";
+body {
+  font-family: '微软雅黑','Helvetica Neue',sans-serif;
+  font-size: 16px;
+}
+
 * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 125px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  html {
+    font-size: 64.6875px;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  html {
+    font-size: 64.375px;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  html {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  html {
+    font-size: 58.59375px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 56.25px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 50px;
+  }
+}
+
+body, ul, li, dl, dt, dd {
   margin: 0;
   padding: 0;
+}
+
+ul, li {
   list-style: none;
 }
-.lxr_header {
-  width: 100%;
-  height: 50px;
-  background: #01A5E2;
-  color: white;
-  font-size: 26px;
-  text-align: center;
-  line-height: 48px;
+
+.header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
-}
-.lxr_search {
   width: 100%;
-  height: 50px;
-  background: #C9C9CE;
-  border-top: 1px solid #99999D;
-  border-bottom: 1px solid #99999D;
-  position: fixed;
-  top: 50px;
-  left: 0;
-  z-index: 10;
-}
-.lxr_search input {
-  width: 93.6%;
-  height: 37px;
-  border-radius: 7px;
+  height: 0.8rem;
+  line-height: 0.8rem;
   text-align: center;
-  font-size: 26px;
-  color: #CCCCCC;
-  border: 0;
-  margin-top: 7px;
-  margin-left: 3.2%;
+  background-color: #f9f9f9;
+  z-index: 1000;
 }
-.lxr_search input:focus {
-  border: 0;
+
+.sub-header {
+  z-index: 1000;
+  position: fixed;
+  top: 0.8rem;
+  left: 0;
+  width: 100%;
+  height: 0.88rem;
+  background: #c9c9ce;
 }
-.lxr_search img {
+
+.sub-header .search {
+  width: 5.9rem;
+  height: 0.56rem;
+  display: block;
+  border: none;
+  border-radius: 5px;
   position: absolute;
-  top: 15px;
-  left: 30%;
-}
-.reminder {
-  width: 90%;
-  height: 50px;
-  background: #F2F2F2;
-  display: none;
-  font-size: 26px;
-  color: #4D4D4D;
-  line-height: 54px;
-  padding-left: 6%;
-  position: fixed;
-  top: 100px;
   left: 0;
-  z-index: 5;
-}
-.lxr_refresh {
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  padding-top: 60px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.lxr_refresh .lxr_shuaxin {
-  width: 100%;
-  height: 20px;
-  font-size: 20px;
-  color: #535353;
-  text-align: center;
-  line-height: 28px;
-  margin-bottom: 20px;
-}
-.lxr_body {
-  width: 93.333333%;
-  height: auto;
-}
-.lxr_body dl {
-  width: 100%;
-  height: auto;
-  padding-left: 6%;
-}
-.lxr_body dl dt {
-  width: 93.57%;
-  height: 45px;
-  background: #F2F2F2;
-  margin-left: -10%;
-  font-size: 20px;
-  color: #4D4D4D;
-  line-height: 45px;
-  padding-left: 6.42%;
-}
-.lxr_body dl dd {
-  width: 93.57%;
-  height: 45px;
-  font-size: 20px;
-  color: #4D4D4D;
-  line-height: 45px;
-  border-bottom: 1px solid #99999D;
-}
-.lxr_body .lxr_nohas {
-  height: 0;
-  overflow: hidden;
-}
-/*侧滑字母*/
-.lxr_slide {
-  width: 6.666666666666%;
-  position: fixed;
-  top: 100px;
   right: 0;
-  z-index: 5;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  outline: none;
   text-align: center;
-  color: #42538F;
-  line-height: 18px;
+  font-size: 0.28rem;
 }
-.lxr_slide li {
-  margin-top: 4px;
-  font-size: 16px;
-  color: #4D5D96;
-  cursor: pointer;
+
+.content {
+  padding-top: 1.68rem;
+}
+
+.content .indexlist {
+  width: 0.3rem;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.content .indexlist li {
+  text-align: center;
+  font-size: 0.23rem;
+  line-height: 0.3rem;
+  width: 100%;
+  height: 0.3rem;
+  color: #007aff;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.content .fixedindex {
+  position: fixed;
+  z-index: 1000;
+  top: 1.68rem;
+  left: 0;
+  width: 100%;
+  padding-left: 0.32rem;
+  height: 0.56rem;
+  line-height: 0.56rem;
+  background-color: #f2f2f2;
+}
+
+.content .userlist {
+  padding-right: 0.3rem;
+}
+
+.content .userlist dt {
+  padding-left: 0.32rem;
+  height: 0.56rem;
+  line-height: 0.56rem;
+  background-color: #f2f2f2;
+}
+
+.content .userlist dd {
+  height: 0.86rem;
+  line-height: 0.86rem;
+  border-bottom: 1px solid #aaa;
+  margin-left: 0.32rem;
+  position: relative;
+}
+
+.content .userlist dd a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  width: 90%;
 }

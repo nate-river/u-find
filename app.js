@@ -59,7 +59,7 @@ app.get('/checkUser', function (req, res) {
   connection.query('SELECT ?? FROM user where account = ?',
   ['password',req.query.account]
   , function(err, result) {
-    if( result[0] && (result[0].password === encode) ){
+    if( result && (result[0].password === encode) ){
       res.json(true);
     }else{
       res.json(false);
@@ -151,7 +151,7 @@ app.get('/updateUserById', function (req, res) {
 });
 
 app.get('/getAllUser', function (req, res) {
-  var columns = ['uname', 'phone', 'tel', 'uid','sindex'];
+  var columns = ['account','uname', 'phone', 'tel', 'uid','sindex'];
   connection.query('SELECT ?? from user', [columns], function(err, rows, fields) {
     if (err) throw err;
     res.json(rows);

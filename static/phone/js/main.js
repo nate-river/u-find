@@ -1,9 +1,5 @@
 $(function(){
-
-  function User () {
-    
-  };
-
+  function User () {};
   User.prototype = {
     checkUser: function(){
       return $.get('/checkUser').then(function(data){
@@ -46,83 +42,112 @@ $(function(){
       },'json')
     }
   }
-
   var u = new User();
+  var contacts = [];
+  u.getAllUser().then(function(data){
+    contacts = data;
+    render(contacts);
+  })
 
-  
+  var toplist;
 
-  // u.addUser().then(function(data){
-  //   console.log(data);
-  // })
-  // u.deleteUserById(41).then(function(data){
-  //   console.log(data);
-  // });
-  // u.getUserById(33).then(function(data){
-  //   console.log(data);
-  // });
-  // u.getAuthById(33).then(function(data){
-  //   console.log(data);
-  // })
-  // u.getAllUser().then(function(data){
-  //   console.log(data);
-  // })
-  // u.updateUserById({
-  //   uid:33,
-  //   uname:'abcd',
-  //   phone:'134567890',
-  //   tel:'6710',
-  // });
+  var render = function(contacts){
+    var data = {};
+    contacts.forEach(function(v){
+      var key = v.sindex.toUpperCase();
+      if( !data[key] ){
+        data[key] = [];
+      }
+      data[key].push(v);
+    })
+    var indexlists = Object.keys(data).sort();
 
+    var html = '';
+    var findlistUlInner = '';
+    indexlists.forEach(function(v){
+      findlistUlInner += '<li>'+v.toUpperCase()+'</li>';
 
-  // /////////////////// 纯Ajax请求示例代码 //////////////
+      var arr = data[v].sort(function(a,b){
+        return a.uname > b.uname;
+      });
+      html += '<dt>'+v.toUpperCase()+'</dt>'
+      arr.forEach(function(v){
+        html += '<dd>'+v.uname+'<a href="tel:'+v.phone+'"></a></dd>';
+      })
+    })
+    var iList = $('.indexlist').html(findlistUlInner)
+    iList.height(iList.children().eq(0).outerHeight(true) * indexlists.length);
+    $('.content .userlist').html(html);
+    toplist = $('.content dt').map(function(i,v){
+      return {top:$(this).offset().top,index:indexlists[i]} ;
+    }).get();
+    $('.content dt').prev().css('border','none');
+    fixedel.text(toplist[0].index);
+    fixedindexh = fixedel.outerHeight(true);
+    off =  header + subheader + fixedindexh;
+  }
 
-  // //获取用户是否能登录
-  // var  checkUser = function(){
-  //   return $.get('/getUserById',{uid:31}).then(function(data){
-  //     return data;
-  //   });
-  // }
-  //
-  // // 添加一个空用户 返回 uid
-  // $.get('/addUser').done(function(data){
-  //   console.log(data);
-  // })
-  //
-  // //删除用户
-  // $.get('/deleteUserById',{uid:9}).done(function(data){
-  //   console.log(data);
-  // })
-  //
-  // //更新用户
-  // $.get('/updateUserById',{
-  //   uid:31,
-  //   uname:'张三',
-  //   phone:'13934714152',
-  //   tel:'6710'
-  // }).done(function(data){
-  //   console.log(data);
-  // })
-  //
-  // //获取所有用户
-  // $.get('/getAllUser').done(function(data){
-  //   console.log(data);
-  // },'json');
-  //
-  //
-  // //
-  // //获取单个用户信息
-  // $.get('/getUserById',{uid:3}).done(function(data){
-  //   console.log(data);
-  // },'json');
-  //
-  // //
-  // //获取用户权限信息
-  // // $.get('/getAuthById',{uid:3}).done(function(data){
-  // //   console.log(data);
-  // // },'json')
-  //
+  ////////////////////////////////////////////////////////////////////
+  //头部固定字母条
+  var fixedel = $('.fixedindex');
+  var header = $('.header').outerHeight(true);
+  var subheader = $('.sub-header').outerHeight(true);
+  var fixedindexh;
+  var off;
+
+  $(window).scroll(function() {
+    var s = $(this).scrollTop() + off;
+    if(toplist){
+      toplist.forEach(function(v){
+        if( s >= v.top ){
+          fixedel.text(v.index);
+          return;
+        }
+      })
+    }
+  });
 
 
 
+  /////////////////////////////////////////////////////////////////
+  //
+
+  var search = function(key){
+    var tmp = contacts.filter(function(v){
+      if( v.uname.indexOf(key) !== -1
+      || v.phone.indexOf(key) !== -1
+      || v.tel.indexOf(key) !== -1
+      || v.account.indexOf(key)!== -1){
+        return true;
+      }else{
+        return false;
+      }
+    })
+    render(tmp);
+  }
+  //
+  $("#search").on('keyup',function(e){
+    $('.fixedindex').hide();
+    search( $(this).val().trim() )
+  })
+
+
+  // return;
+  var sep;
+  var itop;
+  $('.indexlist').on('touchstart',function(e){
+    sep = $('.indexlist li').outerHeight(true);
+    itop = $('.indexlist').get(0).getBoundingClientRect().top;
+    var y = e.originalEvent.changedTouches[0].clientY;
+    var x = Math.floor( (y - itop )/sep);
+    $(window).scrollTop(toplist[x].top - off + fixedindexh);
+    return false;
+  });
+  $('.indexlist').on('touchmove',function(e){
+    var y = e.originalEvent.changedTouches[0].clientY;
+    var x = Math.floor( (y - itop )/sep );
+    $(window).scrollTop(toplist[x].top - off + fixedindexh);
+    return false;
+  });
 
 })
