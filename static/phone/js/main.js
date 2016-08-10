@@ -1,55 +1,35 @@
 $(function(){
-  function User () {};
-  User.prototype = {
-    checkUser: function(){
-      return $.get('/checkUser').then(function(data){
-        return data;
-      });
-    },
-    addUser: function(){
-      return $.get('/addUser').then(function(data){
-        return data;
-      })
-    },
-    deleteUserById: function(id){
-      return $.get('/deleteUserById',{uid:id}).then(function(data){
-        return data;
-      })
-    },
-    updateUserById: function(data){
-      return $.get('/updateUserById',{
-        uid:data.uid,
-        uname:data.uname,
-        phone:data.phone,
-        tel:data.tel,
-      }).then(function(data){
-        return data;
-      })
-    },
-    getAllUser:function(){
-      return $.get('/getAllUser').then(function(data){
-        return data;
-      },'json');
-    },
-    getUserById:function(id){
-      return $.get('/getUserById',{uid:id}).then(function(data){
-        return data;
-      },'json');
-    },
-    getAuthById:function(id){
-      return $.get('/getAuthById',{uid:id}).done(function(data){
-        return data;
-      },'json')
-    }
-  }
-  var u = new User();
   var contacts = [];
-  u.getAllUser().then(function(data){
-    contacts = data;
-    render(contacts);
-  })
 
-  var toplist;
+  $.get('/getAllUser').then(function(list){
+    contacts = list;
+    render(contacts);
+  },'json');
+
+
+  //侧边栏
+  var sideEl = $('.indexlist');
+
+  //用户列表
+  var userlistEl = $('.userlist');
+
+  //始终显示的栏目字母提示
+  var fixedIndex = $('.fixedindex');
+
+  //纪录每一组成员的offsettop
+  var toplist = [];
+
+  //页面滚动条的偏移量
+  var off;
+
+  ///////// 触摸跳转需要的变量
+  // 侧栏中每一个li的高度
+  var sep;
+  // 侧栏距离屏幕顶点的距离
+  var sidetop;
+  // 头部和颈部的高度
+  var soff = $('.header').height() + $('.sub-header').height();
+
 
   var render = function(contacts){
     var data = {};
@@ -62,56 +42,74 @@ $(function(){
     })
     var indexlists = Object.keys(data).sort();
 
-    var html = '';
-    var findlistUlInner = '';
+    var userlistHtml = '';
+    var sideElHtml = '';
     indexlists.forEach(function(v){
-      findlistUlInner += '<li>'+v.toUpperCase()+'</li>';
+      sideElHtml += '<li>'+v.toUpperCase()+'</li>';
 
       var arr = data[v].sort(function(a,b){
         return a.uname > b.uname;
       });
-      html += '<dt>'+v.toUpperCase()+'</dt>'
+      userlistHtml += '<dt>'+v.toUpperCase()+'</dt>'
       arr.forEach(function(v){
-        html += '<dd>'+v.uname+'<a href="tel:'+v.phone+'"></a></dd>';
+        userlistHtml += '<dd>'+v.uname+'<a href="tel:'+v.phone+'"></a></dd>';
       })
     })
-    var iList = $('.indexlist').html(findlistUlInner)
-    iList.height(iList.children().eq(0).outerHeight(true) * indexlists.length);
-    $('.content .userlist').html(html);
-    toplist = $('.content dt').map(function(i,v){
+
+    //创建侧边栏 和 用户列表
+    sideEl.html(sideElHtml);
+    sideEl.height( function(){
+      return $(this).children().eq(0).outerHeight(true) * indexlists.length;
+    } );
+    userlistEl.html(userlistHtml)
+
+    //去掉每组最后一个成员的分割线
+    userlistEl.find('dt').prev().css('border','none');
+
+    toplist = userlistEl.find('dt').map(function(i,v){
       return {top:$(this).offset().top,index:indexlists[i]} ;
     }).get();
-    $('.content dt').prev().css('border','none');
-    fixedel.text(toplist[0].index);
-    fixedindexh = fixedel.outerHeight(true);
-    off =  header + subheader + fixedindexh;
+    fixedIndex.text(toplist[0].index);
+
+    off =  $('.header').height()
+    + $('.sub-header').height()
+    + fixedIndex.height();
+
+
+    //触摸滚动需要的变量
+    sep = sideEl.find('li').outerHeight(true);
+    sidetop = sideEl.get(0).getBoundingClientRect().top;
   }
 
   ////////////////////////////////////////////////////////////////////
   //头部固定字母条
-  var fixedel = $('.fixedindex');
-  var header = $('.header').outerHeight(true);
-  var subheader = $('.sub-header').outerHeight(true);
-  var fixedindexh;
-  var off;
 
-  $(window).scroll(function() {
+  $(window).on('scroll',function() {
     var s = $(this).scrollTop() + off;
     if(toplist){
       toplist.forEach(function(v){
         if( s >= v.top ){
-          fixedel.text(v.index);
+          fixedIndex.text(v.index);
           return;
         }
       })
     }
   });
 
-
+  /////////////////////////////////////////////////////////////////////
+  //右侧点击和拖动
+  $('.indexlist').on('touchstart touchmove',function(e){
+    var y = e.originalEvent.changedTouches[0].clientY;
+    var x = Math.floor( (y - sidetop )/sep);
+    if(x < 0 || x > toplist.length - 1 ){
+      return false;
+    }
+    $(window).scrollTop(toplist[x].top - soff);
+    return false;
+  });
 
   /////////////////////////////////////////////////////////////////
-  //
-
+  //搜索功能
   var search = function(key){
     var tmp = contacts.filter(function(v){
       if( v.uname.indexOf(key) !== -1
@@ -125,29 +123,9 @@ $(function(){
     })
     render(tmp);
   }
-  //
+
   $("#search").on('keyup',function(e){
-    $('.fixedindex').hide();
     search( $(this).val().trim() )
   })
-
-
-  // return;
-  var sep;
-  var itop;
-  $('.indexlist').on('touchstart',function(e){
-    sep = $('.indexlist li').outerHeight(true);
-    itop = $('.indexlist').get(0).getBoundingClientRect().top;
-    var y = e.originalEvent.changedTouches[0].clientY;
-    var x = Math.floor( (y - itop )/sep);
-    $(window).scrollTop(toplist[x].top - off + fixedindexh);
-    return false;
-  });
-  $('.indexlist').on('touchmove',function(e){
-    var y = e.originalEvent.changedTouches[0].clientY;
-    var x = Math.floor( (y - itop )/sep );
-    $(window).scrollTop(toplist[x].top - off + fixedindexh);
-    return false;
-  });
 
 })

@@ -167,5 +167,9 @@ ul,li{
         width: 90%;
       }
     }
+    
+    dd:last-of-type{
+      border:none;
+    }
   }
 }
