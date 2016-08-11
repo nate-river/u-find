@@ -1,3 +1,18 @@
+body{
+  font-size: 16px;
+}
+body,ul,li,p,h1,h2,h3,h4,h5,h6,input,form{
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+a{
+  color: #333;
+  text-decoration: none;
+}
+input{
+  outline:none;
+}
 .wlh-loginbox {
   overflow: hidden;
   background: url("../imgs/wlh/wlh_login_bg.png") no-repeat;
