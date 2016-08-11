@@ -19,7 +19,7 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/app/', function(req, res) {
-	if(res.cookies.__uek__){
+	if(req.cookies.__uek__){
 		res.sendFile(__dirname + '/phone/m_index.html');
 	}else{
 		res.redirect('/app/login');
@@ -27,14 +27,16 @@ app.get('/app/', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-	var account = req.cookies.__uek__;
+	
+  var account = req.cookies.__uek__;
+
 	var columns = ['authority'];
 	connection.query('SELECT ?? from user where phone = ?', [columns, account], function(err, rows, fields) {
 		if (err) throw err;
 		if ( rows[0].authority === 1 ){
 			res.sendFile(__dirname + '/pc/index.html');
 		}else{
-			res.redirct('/login');
+			res.redirect('/login');
 		}
 	});
 });
@@ -47,7 +49,7 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	port: '3306',
 	user: 'root',
-	password: 'root',
+	password: '',
 	database: 'uek',
 	// socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
 });

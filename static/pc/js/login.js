@@ -139,8 +139,10 @@ $(function(){
 		var flag;
 		u.checkUser({account:us,password:up}).then(function (data) {
 			if(data){
+				document.cookie="__uek__="+data.phone;
+        document.cookie="___uek___="+data.password;
 				location.href="/";
-				document.cookies="username="+us;
+				
 			}
 			else{
 				wlh_num++;
