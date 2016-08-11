@@ -132,7 +132,13 @@ $(function(){
             // $(".lx_phoneItem:last-of-type").attr("id",data);
         });
     })
-
+//删除
+    $(".lx_phone").on("click",".lx_del",function(e){
+        var target=$(e.currentTarget);
+        target.closest(".lx_phoneItem").css("display","none");
+        var uid=target.closest(".lx_phoneItem").attr("id");
+        u.deleteUserById(uid);
+    })
 //  搜索功能
 
     $('#lx_inputS').on('keyup', function(e) {
@@ -211,6 +217,10 @@ $(function(){
         lx_phoneItem.append(lx_change);
 
         // 修改按钮
+        var lx_btn=$("<div>").addClass("lx_btn");
+        var lx_del=$("<a>").addClass("lx_del");
+        lx_btn.append(lx_del);
+        lx_phoneItem.append(lx_btn);
 
         return  lx_phoneItem;
     }
