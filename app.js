@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 	var columns = ['authority'];
 	connection.query('SELECT ?? from user where phone = ?', [columns, account], function(err, rows, fields) {
 		if (err) throw err;
-		if ( rows[0].authority === 1 ){
+		if ( rows && rows[0].authority === 1 ){
 			res.sendFile(__dirname + '/pc/index.html');
 		}else{
 			res.redirect('/login');
