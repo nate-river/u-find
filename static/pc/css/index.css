@@ -20,6 +20,10 @@ h6 {
 body {
   background: #ffffff;
 }
+input {
+  border: none;
+  outline: none;
+}
 * {
   font-family: "Microsoft YaHei UI";
 }
@@ -82,12 +86,10 @@ body {
   width: 1020px;
   height: auto;
   margin: 0 auto;
+  overflow: hidden;
 }
 .lx_phone .lx_hideC .lx_change {
   display: block!important;
-}
-.lx_phone .lx_hideC .lx_info {
-  display: none!important;
 }
 .lx_phone .lx_phoneItemF {
   width: 260px;
@@ -140,7 +142,7 @@ body {
 }
 .lx_phone .lx_phoneItem .lx_info .lx_tel {
   font-size: 14px;
-  color: #dedede;
+  color: #191919;
 }
 .lx_phone .lx_phoneItem .lx_change {
   position: absolute;
@@ -151,7 +153,6 @@ body {
   margin-bottom: auto;
   width: 174px;
   line-height: 35px;
-  display: none;
 }
 .lx_phone .lx_phoneItem .lx_change input {
   border: none;
