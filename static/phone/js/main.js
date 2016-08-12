@@ -20,8 +20,6 @@ $(function() {
 	// 侧栏距离屏幕顶点的距离
 	var sidetop;
 
-
-
 	var sync = function() {
 		$.ajax({
 			url: "/getAlluser",
@@ -38,7 +36,7 @@ $(function() {
 		var data = {};
 		contacts.forEach(function(v) {
 			var key = v.sindex.toUpperCase();
-			if (!data[key]) {
+			if(!data[key]) {
 				data[key] = [];
 			}
 			data[key].push(v);
@@ -72,35 +70,30 @@ $(function() {
 		//去掉每组最后一个成员的分割线
 		userlistEl.find('dt').prev().css('border', 'none');
 
-
-
-		if (indexlists.length !== 0) {
+		if(indexlists.length !== 0) {
 			toplist = userlistEl.find('dt').map(function(i, v) {
 				return {
 					top: $(this).offset().top,
 					index: indexlists[i]
 				};
 			}).get();
-			if ($('.fixedindex').text().trim() === '') {
+			if($('.fixedindex').text().trim() === '') {
 				$('.fixedindex').text(toplist[0].index);
 			}
 		} else {
 			$('.fixedindex').text('');
 		}
 
-
 		off = $('.header').height() + $('.sub-header').height() + $('.fixedindex').height();
-
 
 		//触摸滚动需要的变量
 		sep = sideEl.find('li').outerHeight(true);
 		sidetop = sideEl.position().top;
 	}
 
-
 	/////////////////////////////////////////////////////////
 	//保障没有网络也能使用
-	if (localStorage.__findu__data) {
+	if(localStorage.__findu__data) {
 		contacts = JSON.parse(localStorage.__findu__data);
 		setTimeout(function() {
 			render(contacts);
@@ -126,17 +119,18 @@ $(function() {
 
 	// fixed andorid>>>>>>>>>
 	$(window).on('resize', function() {
-		render(contacts);
+		search($('#search').val().trim());
 	})
 
 	////////////////////////////////////////////////////////////////////
 	//头部固定字母条
 
 	$(window).on('scroll', function() {
+		$(".lxr_zhezhao,lxr_copyright").hide();
 		var s = $(this).scrollTop() + off;
-		if (toplist) {
+		if(toplist) {
 			toplist.forEach(function(v) {
-				if (s >= v.top) {
+				if(s >= v.top) {
 					$('.fixedindex').text(v.index);
 					return;
 				}
@@ -150,7 +144,7 @@ $(function() {
 		var soff = $('.header').height() + $('.sub-header').height();
 		var y = e.originalEvent.changedTouches[0].clientY;
 		var x = Math.floor((y - sidetop) / sep);
-		if (x < 0 || x > toplist.length - 1) {
+		if(x < 0 || x > toplist.length - 1) {
 			return false;
 		}
 		$(window).scrollTop(toplist[x].top - soff);
@@ -161,7 +155,7 @@ $(function() {
 	//搜索功能
 	var search = function(key) {
 		var tmp = contacts.filter(function(v) {
-			if (v.uname.indexOf(key) !== -1 || v.phone.indexOf(key) !== -1 || v.tel.indexOf(key) !== -1 || v.account.indexOf(key) !== -1) {
+			if(v.uname.indexOf(key) !== -1 || v.phone.indexOf(key) !== -1 || v.tel.indexOf(key) !== -1 || v.account.indexOf(key) !== -1) {
 				return true;
 			} else {
 				return false;
@@ -177,9 +171,13 @@ $(function() {
 
 	$('#search').on('input', function(e) {
 		search($(this).val().trim())
-		if ($(this).val().trim() === '') {
+		if($(this).val().trim() === '') {
 			$(this).trigger('blur');
 		}
+	})
+
+	$(".header .lxr_change").on('touchstart', function() {
+		localStorage.sgqreset = 'true';
 	})
 
 })

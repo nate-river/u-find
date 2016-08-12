@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="findu">
-  <link rel="apple-touch-icon" href="/phone/imgs/findu.png">
 
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="findu">
-  <link rel="icon" sizes="128x128" href="/phone/imgs/findu.png">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="findu">
+		<link rel="apple-touch-icon" href="/phone/imgs/findu.png">
+		<title>uek</title>
+		<script src="/phone/js/jquery.js" charset="utf-8"></script>
+		<script src="/phone/js/main.js" charset="utf-8"></script>
+		<script>
+			if(localStorage.sgqphone) {} else {
+				location.href = "/app/login";
+			}
+		</script>
+		<link rel="stylesheet" href="/phone/css/main.css">
+		<link rel="stylesheet" href="/phone/css/iconfont.css">
+	</head>
 
-  <title>uek</title>
-  <script src="/phone/js/jquery.js" charset="utf-8"></script>
-  <script src="/phone/js/main.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/phone/css/main.css">
-</head>
-<body>
-  <div class="header">
-    联系人
-  </div>
-  <div class="sub-header">
-    <input type="text" class="search" id="search">
-  </div>
+	<body>
+		<div class="header">
+			<a class="lxr_change iconfont icon-xiugaimima" href="/app/login"></a>
+			<span class="lxr_people">联系人</span>
+			<a class="lxr_information" href="/app/copyright">@</a>
+		</div>
 
-  <div class="content">
-    <div class="fixedindex"></div>
-    <ul class="indexlist"></ul>
-    <dl class="userlist">
-    </dl>
-  </div>
-</body>
+		<div class="sub-header">
+			<input type="text" class="search" id="search">
+		</div>
+
+		<div class="content">
+			<div class="fixedindex"></div>
+			<ul class="indexlist"></ul>
+			<dl class="userlist">
+			</dl>
+		</div>
+	</body>
+
 </html>

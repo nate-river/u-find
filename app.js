@@ -14,6 +14,10 @@ app.get('/app/login', function(req, res) {
 	res.sendFile(__dirname + '/phone/m_login.html');
 });
 
+app.get('/app/copyright', function(req, res) {
+	res.sendFile(__dirname + '/phone/slide.html');
+});
+
 app.get('/login', function(req, res) {
 	res.sendFile(__dirname + '/pc/login.html');
 });
@@ -49,7 +53,7 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	port: '3306',
 	user: 'root',
-	password: '',
+	password: 'root',
 	database: 'uek',
 	// socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
 });
