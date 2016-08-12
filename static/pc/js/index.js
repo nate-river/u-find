@@ -84,7 +84,7 @@ $(function(){
            }else{
                var index=tel["index"];
                var xiaohao=tel[0].slice(1,-1);
-               var shouji=lx_changeP.slice(0,index);
+               var shouji=lx_changeP.trim().slice(0,11);
            }
 
             u.updateUserById({
