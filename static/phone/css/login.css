@@ -28,6 +28,17 @@ input {
 	outline: none;
 }
 
+.sgq-return{
+	font-size: .3rem;
+    position: absolute;
+    top: .4rem;
+    right: .3rem;
+    border: 1px solid #ddd;
+    color:#888787;
+    padding: .05rem;
+    border-radius: 3px;	
+}
+
 .wlh-loginbox {
 	overflow: hidden;
 	background: url("../imgs/wlh/wlh_login_bg_min.png") no-repeat;

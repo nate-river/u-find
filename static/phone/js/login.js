@@ -12,6 +12,9 @@ $(function() {
 		$(".wlh-login").fadeOut(200);
 		$(".wlh-reset").addClass("wlh-resetmove");
 		$('#username2').val(JSON.parse(localStorage.sgqphone).phone).attr("readonly", "readonly");
+		$('.sgq-return').click(function(){
+			history.back();
+		});
 
 		$(".myreset").submit(function() {
 			var us2 = $("[name='username2']").val();
