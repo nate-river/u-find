@@ -184,7 +184,6 @@ $(function(){
             var  arr = data[v].sort(function(a, b) {
                 return a.uname > b.uname;
             });
-             console.log(arr)
             arr.forEach(function(v) {
                 $(".lx_phoneCon").append(createItem(v));
             })
@@ -211,7 +210,7 @@ $(function(){
         var lx_change=$("<div>").addClass("lx_change lx_hideC");
         var lx_changeN=$("<input>").prop({" type":"text","maxlength":6,"placeholder":"请输入您的姓名","class":"lx_changeN"}).val(option.uname.trim());
 
-        var lx_changeP=$("<input>").prop({" type":"text","maxlength":25,"placeholder":"请输入您的电话及小号","class":"lx_changeP"}).val(option.phone+" ( "+option.tel.trim()+" ) ");
+        var lx_changeP=$("<input>").prop({" type":"text","maxlength":25,"placeholder":"请输入您的电话及小号","class":"lx_changeP"}).val(option.phone+"("+option.tel.trim()+")");
         lx_change.append(lx_changeN);
         lx_change.append(lx_changeP);
         lx_phoneItem.append(lx_change);

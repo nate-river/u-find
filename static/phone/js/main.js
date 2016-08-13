@@ -14,12 +14,6 @@ $(function() {
 	//页面滚动条的偏移量
 	var off;
 
-	///////// 触摸跳转需要的变量
-	// 侧栏中每一个li的高度
-	var sep;
-	// 侧栏距离屏幕顶点的距离
-	var sidetop;
-
 	var sync = function() {
 		$.ajax({
 			url: "/getAlluser",
@@ -86,9 +80,8 @@ $(function() {
 
 		off = $('.header').height() + $('.sub-header').height() + $('.fixedindex').height();
 
-		//触摸滚动需要的变量
-		sep = sideEl.find('li').outerHeight(true);
-		sidetop = sideEl.position().top;
+		
+		
 	}
 
 	/////////////////////////////////////////////////////////
@@ -142,6 +135,8 @@ $(function() {
 	//右侧点击和拖动
 	$('.indexlist').on('touchstart touchmove', function(e) {
 		var soff = $('.header').height() + $('.sub-header').height();
+		var sep = sideEl.find('li').outerHeight(true);
+		var sidetop = sideEl.position().top;
 		var y = e.originalEvent.changedTouches[0].clientY;
 		var x = Math.floor((y - sidetop) / sep);
 		if(x < 0 || x > toplist.length - 1) {
