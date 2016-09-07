@@ -3,6 +3,10 @@ $(document).ready(function() {
 	$("html").css({
 		fontSize: w / 7.19
 	});
+	// if(localStorage.sgqphone){
+	// 	location.href = '/app';
+	// }
+					
 })
 
 $(function() {
@@ -248,8 +252,8 @@ $(function() {
 			data: "account=" + us + "&password=" + up,
 			success: function(data) {
 				if(data) {
-					document.cookie = "__uek__=" + data.phone;
-					document.cookie = "___uek___=" + data.password;
+					Cookies.set('__uek__', data.phone, { expires: 100 });
+					Cookies.set('___uek___', data.password, { expires: 100 });
 					localStorage.sgqphone = JSON.stringify(data);
 					location.href = '/app';
 				} else {

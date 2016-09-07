@@ -16,8 +16,7 @@ $(function() {
 
 	var sync = function() {
 		$.ajax({
-			url: "/getAlluser",
-			dataType: "jsonp",
+			url: "/getalluser",
 			success: function(list) {
 				contacts = list;
 				render(contacts);
@@ -93,7 +92,7 @@ $(function() {
 		}, 0);
 		setTimeout(function() {
 			sync();
-		}, 500);
+		}, 20);
 		//校验用户是否   依然  存在
 		//		setTimeout(function() {
 		//			$.ajax({
